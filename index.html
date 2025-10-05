@@ -1,4 +1,3 @@
-index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,5 +12,40 @@ index.html
     <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="terms.html">Terms of Service</a></li>
   </ul>
+  <!-- بداية كود Pi SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    // تهيئة Pi SDK
+    Pi.init({
+      version: "2.0",
+      sandbox: true // خليه true لأن التطبيق على testnet حالياً
+    });
+
+    // دالة الاتصال بالمحفظة
+    async function connectPi() {
+      try {
+        const scopes = ['payments', 'username', 'wallet_address'];
+        const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
+        console.log('Connected user:', auth.user);
+      } catch (err) {
+        console.error('Pi connection error:', err);
+      }
+    }
+
+    // معالجة المدفوعات غير المكتملة
+    function onIncompletePaymentFound(payment) {
+      console.log('Incomplete payment found:', payment);
+    }
+
+    // إنشاء زر الاتصال بـ Pi
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.createElement("button");
+      btn.innerText = "Connect with Pi";
+      btn.style.cssText = "padding:10px 20px; font-size:16px; cursor:pointer; margin-top:20px;";
+      btn.onclick = connectPi;
+      document.body.appendChild(btn);
+    });
+  </script>
+  <!-- نهاية كود Pi SDK -->
 </body>
 </html>
