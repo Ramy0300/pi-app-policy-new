@@ -1,2 +1,2 @@
-# pi-app-policy-new-
+# pi-app-policy-new
 ملفات سياسة الخصوصية وشروط الخدمة لتطبيق Pi
